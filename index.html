@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="lib/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/class.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/game_init.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/game.js" type="text/javascript" charset="utf-8"></script>
+    <title>Game</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+var gameInit = new GameInit();
+var game = new Game(gameInit);
+
+(function() {
+    var onEachFrame;
+    if (window.webkitRequestAnimationFrame) {
+        onEachFrame = function(cb) {
+            var _cb = function() { cb(); webkitRequestAnimationFrame(_cb); }
+            _cb();
+        };
+    } else if (window.mozRequestAnimationFrame) {
+        onEachFrame = function(cb) {
+            var _cb = function() { cb(); mozRequestAnimationFrame(_cb); }
+            _cb();
+        };
+    } else {
+        onEachFrame = function(cb) {
+            setInterval(cb, 1000 / 60);
+        }
+    }
+    
+    window.onEachFrame = onEachFrame;
+})();
+
+
+      window.onEachFrame(function() {
+          var time = game.updateWithTime();
+          game.update();
+          console.log(time)
+      });
+    </script>
+  </body>
+</html>
