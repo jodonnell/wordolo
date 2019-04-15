@@ -7,17 +7,18 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            include: [path.resolve(__dirname, 'app'), path.resolve(__dirname, 'lib')],
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        ['es2015', { modules: false }]
-                    ]
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                        plugins: ['@babel/plugin-proposal-object-rest-spread']
+                    }
                 }
-            }]
-        }]
+            }
+        ]
     }
 };
