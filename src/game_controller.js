@@ -13,7 +13,7 @@ class GameController {
         this.control = control;
         this.current = window.gameImages.mamaPortrait;
         this.tick = 0;
-        this.text = new PixelFont(text, 275, 590, 1200, 800, 'blue', 30, 1);
+        this.text = new PixelFont(text, 275, 590, 1200, 800, 'blue', 30, 3);
     }
 
     draw() {
