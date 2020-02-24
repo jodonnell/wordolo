@@ -7,11 +7,11 @@ class GameInit {
     }
 
     static get width() {
-        return 1000;
+        return 1200;
     }
 
     static get height() {
-        return 600;
+        return 800;
     }
 
     static get centerY() {

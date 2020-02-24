@@ -1,7 +1,8 @@
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-    entry: './app/index.js',
+    entry: './src/index.js',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
@@ -11,13 +12,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                        plugins: ['@babel/plugin-proposal-object-rest-spread']
-                    }
-                }
+                use: 'babel-loader'
             }
         ]
     }

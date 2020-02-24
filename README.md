@@ -1,15 +1,15 @@
 # Install
-npm install
+yarn install
 
 # Tests
 Start Karma:
-npm run test-start
+yarn run test-start
 
 open browser to http://localhost:9876/
 npm run test
 
 # Start Server
-npm run dev
+yarn run dev
 open index.html
 
 # Configure

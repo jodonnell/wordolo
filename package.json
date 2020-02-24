@@ -4,28 +4,22 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/runtime": "^7.8.4",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "babel-loader": "^8.0.5",
-    "eslint": "^5.16.0",
-    "jasmine": "^2.5.3",
-    "jasmine-core": "^2.5.2",
-    "karma": "^1.5.0",
-    "karma-jasmine": "^1.1.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^2.0.3",
-    "sinon": "^7.3.1",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.0"
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "babel-loader": "^8.0.6",
+    "prettier": "^1.19.1",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   },
   "scripts": {
-    "dev": "webpack -d --watch",
-    "prod": "webpack -p",
-    "test-start": "karma start",
-    "test": "karma run",
+    "dev": "webpack -d --mode development --watch",
+    "prod": "webpack -p --mode production",
     "lint": "find app/ spec/ -name '*.js' | xargs ./node_modules/.bin/eslint --quiet"
   }
 }
