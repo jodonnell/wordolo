@@ -7,11 +7,15 @@ class GameInit {
     }
 
     static get width() {
-        return 1200;
+        return window.innerWidth;
     }
 
     static get height() {
-        return 800;
+        return window.innerHeight;
+    }
+
+    static get centerX() {
+        return this.width / 2;
     }
 
     static get centerY() {

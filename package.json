@@ -4,22 +4,21 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/runtime": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/runtime": "^7.10.2",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/plugin-transform-runtime": "^7.8.3",
-    "@babel/preset-env": "^7.8.4",
-    "babel-loader": "^8.0.6",
-    "prettier": "^1.19.1",
-    "webpack": "^4.41.6",
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "babel-loader": "^8.1.0",
+    "prettier": "^2.0.5",
+    "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
   "scripts": {
     "dev": "webpack -d --mode development --watch",
-    "prod": "webpack -p --mode production",
-    "lint": "find app/ spec/ -name '*.js' | xargs ./node_modules/.bin/eslint --quiet"
+    "prod": "webpack -p --mode production"
   }
 }

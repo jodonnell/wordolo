@@ -2,7 +2,6 @@ import SceneCreator from './scene_creator';
 import GameInit from './game_init';
 import InputControl from './input_control';
 import GameController from './game_controller';
-import Images from './images';
 
 const start = async () => {
     SceneCreator.stats();
@@ -10,13 +9,9 @@ const start = async () => {
     new GameInit();
     window.ctx = document.getElementById('gameCanvas').getContext('2d');
 
-    const images = new Images();
-    await images.load();
-    window.gameImages = images.images();
-
     const font = new FontFace(
-        'Press Start 2P',
-        'url(https://fonts.gstatic.com/s/pressstart2p/v8/e3t4euO8T-267oIAQAu6jDQyK3nVivNm4I81.woff2)'
+        'Chewy',
+        'url(https://fonts.gstatic.com/s/chewy/v11/uK_94ruUb-k-wn52KjI9OPec.woff2)'
     );
 
     await font.load();
