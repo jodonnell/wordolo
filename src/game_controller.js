@@ -41,13 +41,17 @@ class GameController {
     }
 
     onMove({ x, y }) {
-        this.heldLetters[0].x = x;
-        this.heldLetters[0].y = y;
+        if (this.heldLetters.length > 0) {
+            this.heldLetters[0].x = x;
+            this.heldLetters[0].y = y;
+        }
     }
 
     onDrop({ x, y }) {
-        this.heldLetters[0].x = x;
-        this.heldLetters[0].y = y;
+        if (this.heldLetters.length > 0) {
+            this.heldLetters[0].x = x;
+            this.heldLetters[0].y = y;
+        }
         this.heldLetters = [];
     }
 
