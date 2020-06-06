@@ -38,7 +38,7 @@ class Letter {
         if (this.y > GameInit.height || this.y < 0)
             this.momentum.reverseY();
 
-        this.momentum.applyFriction();
+        this.momentum.applyFriction(this);
     }
 
     dragTo(x, y) {

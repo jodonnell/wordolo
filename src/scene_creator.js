@@ -10,6 +10,7 @@ class SceneCreator {
         window.stats.domElement.style.right = '0px';
         window.stats.domElement.style.top = '0px';
         window.stats.domElement.style.float = 'right';
+        window.stats.domElement.style.zIndex = '5';
 
         document.body.appendChild( window.stats.domElement );
     }

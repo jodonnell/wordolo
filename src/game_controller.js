@@ -15,7 +15,10 @@ class GameController {
         this.control.onMove = (args) => this.onMove(args);
         this.control.onDrop = (args) => this.onDrop(args);
         this.heldLetters = [];
-        new Words();
+        this.words = new Words();
+
+        document.addEventListener('stoppedMoving', (e) => this.checkForWord(e.detail.letter), false);
+
     }
 
     draw() {
@@ -35,6 +38,10 @@ class GameController {
 
     }
 
+    checkForWord(letter) {
+        this.words.checkForWord(letter, this.letters);
+    }
+
     onPress({ x, y }) {
         this.letters.forEach((letter) => {
             if (between(letter.x, x - 20, x + 20) && between(letter.y, y - 20, y + 20)) {
@@ -52,9 +59,13 @@ class GameController {
 
     onDrop({ x, y }) {
         if (this.heldLetters.length > 0) {
-            this.heldLetters[0].x = x;
-            this.heldLetters[0].y = y;
-            this.heldLetters[0].isHeld = false;
+            const letter = this.heldLetters[0];
+            letter.x = x;
+            letter.y = y;
+            letter.isHeld = false;
+            if (!letter.momentum.isMoving())
+                this.checkForWord(letter, this.letters);
+
         }
         this.heldLetters = [];
     }

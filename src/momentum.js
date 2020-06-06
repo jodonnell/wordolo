@@ -22,7 +22,9 @@ class Momentum {
         this.ySpeed = Math.max(this.ySpeed, -MAX_SPEED);
     }
 
-    applyFriction() {
+    applyFriction(letter) {
+        const wasMoving = this.isMoving();
+
         if (this.xSpeed > 0)
             this.xSpeed = Math.max(0, this.xSpeed - FRICTION);
         if (this.ySpeed > 0)
@@ -32,6 +34,13 @@ class Momentum {
             this.xSpeed = Math.min(0, this.xSpeed + FRICTION);
         if (this.ySpeed < 0)
             this.ySpeed = Math.min(0, this.ySpeed + FRICTION);
+
+        if (wasMoving && !this.isMoving())
+            this.fireStoppedMovingEvent(letter);
+    }
+
+    isMoving() {
+        return this.xSpeed !== 0 || this.ySpeed !== 0;
     }
 
     reverseX() {
@@ -40,6 +49,20 @@ class Momentum {
 
     reverseY() {
         this.ySpeed *= -1;
+    }
+
+    fireStoppedMovingEvent(letter) {
+        const event = new CustomEvent(
+	    'stoppedMoving',
+	    {
+		detail: {
+		    letter,
+		},
+		bubbles: true,
+		cancelable: true
+	    }
+        );
+        document.body.dispatchEvent(event);
     }
 }
 
