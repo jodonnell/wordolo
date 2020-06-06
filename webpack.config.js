@@ -13,7 +13,11 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: 'babel-loader'
-            }
+            },
+            {
+                test: /\.txt$/i,
+                use: 'raw-loader',
+            },
         ]
     }
 };

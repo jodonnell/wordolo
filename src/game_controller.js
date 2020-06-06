@@ -1,5 +1,6 @@
 import GameInit from './game_init';
 import LetterPlacer from './letter_placer';
+import Words from './words';
 
 function between(x, min, max) {
   return x >= min && x <= max;
@@ -14,6 +15,7 @@ class GameController {
         this.control.onMove = (args) => this.onMove(args);
         this.control.onDrop = (args) => this.onDrop(args);
         this.heldLetters = [];
+        new Words();
     }
 
     draw() {
