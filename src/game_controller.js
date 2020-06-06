@@ -29,7 +29,7 @@ class GameController {
 
     update() {
         this.letters.forEach((letter) => {
-            letter.draw();
+            letter.update();
         });
 
 
@@ -37,15 +37,16 @@ class GameController {
 
     onPress({ x, y }) {
         this.letters.forEach((letter) => {
-            if (between(letter.x, x - 20, x + 20) && between(letter.y, y - 20, y + 20))
+            if (between(letter.x, x - 20, x + 20) && between(letter.y, y - 20, y + 20)) {
+                letter.isHeld = true;
                 this.heldLetters.push(letter);
+            }
         });
     }
 
     onMove({ x, y }) {
         if (this.heldLetters.length > 0) {
-            this.heldLetters[0].x = x;
-            this.heldLetters[0].y = y;
+            this.heldLetters[0].dragTo(x, y);
         }
     }
 
@@ -53,6 +54,7 @@ class GameController {
         if (this.heldLetters.length > 0) {
             this.heldLetters[0].x = x;
             this.heldLetters[0].y = y;
+            this.heldLetters[0].isHeld = false;
         }
         this.heldLetters = [];
     }
