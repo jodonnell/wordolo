@@ -12,6 +12,7 @@ class InputControl {
             return {
                 x: e.offsetX,
                 y: e.offsetY,
+                id: '0',
             };
         };
 
@@ -20,6 +21,7 @@ class InputControl {
             return {
                 x: touch.pageX,
                 y: touch.pageY,
+                id: touch.identifier.toString()
             };
         };
 

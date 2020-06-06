@@ -14,7 +14,7 @@ class GameController {
         this.control.onPress = (args) => this.onPress(args);
         this.control.onMove = (args) => this.onMove(args);
         this.control.onDrop = (args) => this.onDrop(args);
-        this.heldLetters = [];
+        this.heldLetters = {};
         this.words = new Words();
 
         document.addEventListener('stoppedMoving', (e) => this.checkForWord(e.detail.letter), false);
@@ -34,32 +34,30 @@ class GameController {
         this.letters.forEach((letter) => {
             letter.update();
         });
-
-
     }
 
     checkForWord(letter) {
         this.words.checkForWord(letter, this.letters);
     }
 
-    onPress({ x, y }) {
+    onPress({ x, y, id }) {
         this.letters.forEach((letter) => {
-            if (between(letter.x, x - 20, x + 20) && between(letter.y, y - 20, y + 20)) {
+            if (between(letter.x, x - 70, x) && between(letter.y, y - 50, y + 20)) {
                 letter.isHeld = true;
-                this.heldLetters.push(letter);
+                this.heldLetters[id] = letter;
             }
         });
     }
 
-    onMove({ x, y }) {
-        if (this.heldLetters.length > 0) {
-            this.heldLetters[0].dragTo(x, y);
+    onMove({ x, y, id }) {
+        if (id in this.heldLetters) {
+            this.heldLetters[id].dragTo(x, y);
         }
     }
 
-    onDrop({ x, y }) {
-        if (this.heldLetters.length > 0) {
-            const letter = this.heldLetters[0];
+    onDrop({ x, y, id }) {
+        if (id in this.heldLetters) {
+            const letter = this.heldLetters[id];
             letter.x = x;
             letter.y = y;
             letter.isHeld = false;
@@ -67,7 +65,7 @@ class GameController {
                 this.checkForWord(letter, this.letters);
 
         }
-        this.heldLetters = [];
+        delete this.heldLetters[id];
     }
 
     drawCenterLine() {
