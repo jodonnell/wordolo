@@ -9,20 +9,20 @@ class InputControl {
     getKey() {
         const mouseConvert = (e) => {
             e.preventDefault();
-            return {
+            return [{
                 x: e.offsetX,
                 y: e.offsetY,
                 id: '0',
-            };
+            }];
         };
 
         const touchConvert = (e) => {
-            const touch = e.touches[0] || e.changedTouches[0];
-            return {
+            const touches = e.touches || e.changedTouches;
+            return touches.map(touch => ({
                 x: touch.pageX,
                 y: touch.pageY,
                 id: touch.identifier.toString()
-            };
+            }));
         };
 
         document.addEventListener('mousedown', (e) => this.onPress(mouseConvert(e)), false);

@@ -1,3 +1,4 @@
+import { last } from 'lodash';
 import GameInit from './game_init';
 import LetterPlacer from './letter_placer';
 import Words from './words';
@@ -40,7 +41,8 @@ class GameController {
         this.words.checkForWord(letter, this.letters);
     }
 
-    onPress({ x, y, id }) {
+    onPress(touches) {
+        const { x, y, id } = last(touches);
         const isLeft = x < GameInit.centerX;
         this.letters.forEach((letter) => {
             let isLetterHeld;
@@ -55,13 +57,15 @@ class GameController {
         });
     }
 
-    onMove({ x, y, id }) {
+    onMove(touches) {
+        const { x, y, id } = last(touches);
         if (id in this.heldLetters) {
             this.heldLetters[id].dragTo(x, y);
         }
     }
 
-    onDrop({ x, y, id }) {
+    onDrop(touches) {
+        const { x, y, id } = last(touches);
         if (id in this.heldLetters) {
             const letter = this.heldLetters[id];
             letter.x = x;
