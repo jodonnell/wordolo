@@ -41,8 +41,14 @@ class GameController {
     }
 
     onPress({ x, y, id }) {
+        const isLeft = x < GameInit.centerX;
         this.letters.forEach((letter) => {
-            if (between(letter.x, x - 70, x) && between(letter.y, y - 50, y + 20)) {
+            let isLetterHeld;
+            if (isLeft)
+                isLetterHeld = between(letter.x, x - 70, x) && between(letter.y, y - 50, y + 20);
+            else
+                isLetterHeld = between(letter.x, x, x + 70) && between(letter.y, y - 20, y + 50);
+            if (isLetterHeld) {
                 letter.isHeld = true;
                 this.heldLetters[id] = letter;
             }
