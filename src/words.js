@@ -33,9 +33,8 @@ class Words {
         );
 
         const letterIndex = findIndex(viableLetters, letter);
-        const rawLetters = viableLetters.map(l => l.letter);
 
-        const found = this.search(rawLetters, letterIndex, isRight);
+        const found = this.search(viableLetters, letterIndex, isRight);
         const notFound = found[0] === 0 && found[1] === 0;
         if (!notFound) {
             const removeLetters = viableLetters.slice(found[0], found[1]);
@@ -46,15 +45,21 @@ class Words {
         }
     }
 
-    search(rawLetters, letterIndex, isRight) {
+    search(viableLetters, letterIndex, isRight) {
+        const rawLetters = viableLetters.map(l => l.letter);
+
         const biggestRange = [0, 0];
-        for (let i = 0; i < rawLetters.length; i++) {
-            for (let j = i; j <= rawLetters.length; j++) {
-                const testWordArr = rawLetters.slice(i, j);
-                const testWord = (isRight ? testWordArr.reverse() : testWordArr).join('');
+        for (let i = 0; i < viableLetters.length; i++) {
+            for (let j = i; j <= viableLetters.length; j++) {
+                const testWordArr = viableLetters.slice(i, j);
+                const testWordOrderedArr = isRight ? testWordArr.reverse() : testWordArr;
+                const testWord = testWordOrderedArr.map(l => l.letter).join('');
                 if (testWord.length === 0)
                     continue;
-                if (this.words[testWord] && letterIndex >= i && letterIndex <= j) {
+
+                const isDroppedLetterInWord = letterIndex >= i && letterIndex <= j;
+                const isRealWord = this.words[testWord];
+                if (isRealWord && isDroppedLetterInWord && this.areLettersClose(testWordOrderedArr, isRealWord)) {
                     const lastSize = biggestRange[1] - biggestRange[0];
                     if (j - i > lastSize) {
                         biggestRange[0] = i;
@@ -64,6 +69,16 @@ class Words {
             }
         }
         return biggestRange;
+    }
+
+    areLettersClose(word, isRight) {
+        const ys = (isRight ? word.reverse() : word).map(l => l.y);
+        let isClose = true;
+        for (let i = 0; i < ys.length - 1; i++) {
+            if (!between(ys[i + 1] - ys[i], 25, 55))
+                isClose = false;
+        }
+        return isClose;
     }
 }
 
